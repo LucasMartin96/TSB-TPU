@@ -1,7 +1,6 @@
 package negocio;
 
-import soporte.TSBHashtable;
-import soporte.TextFile;
+import soporte.TSBHashtableDA;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,10 +8,10 @@ import java.util.Collection;
 import java.util.Scanner;
 
 public class Regiones {
-    private TSBHashtable pais;
+    private TSBHashtableDA pais;
 
     public Regiones(String carpeta) {
-        pais = new TSBHashtable();
+        pais = new TSBHashtableDA();
         pais.put("00",new Region("00","Argentina"));
         identificarRegiones(carpeta + "\\descripcion_regiones.dsv");
     }

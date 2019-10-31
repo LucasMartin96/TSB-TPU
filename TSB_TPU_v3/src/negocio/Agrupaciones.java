@@ -1,19 +1,19 @@
 package negocio;
 
-import soporte.TSBHashtable;
+import soporte.TSBHashtableDA;
 import soporte.TextFile;
 
 public class Agrupaciones {
     private TextFile descripcionPostulaciones;
-    private TSBHashtable votacion;
+    private TSBHashtableDA votacion;
 
     public Agrupaciones(String carpeta) {
         descripcionPostulaciones = new TextFile(carpeta + "\\descripcion_postulaciones.dsv");
         votacion = descripcionPostulaciones.identificarAgrupaciones();
     }
 
-    public TSBHashtable generarVacia() {
-        TSBHashtable tabla = new TSBHashtable();
+    public TSBHashtableDA generarVacia() {
+        TSBHashtableDA tabla = new TSBHashtableDA();
         for (Object a : votacion.values()) {
             Agrupacion agrupacion = (Agrupacion) a;
             tabla.put(agrupacion.getCodigo(), new Agrupacion(agrupacion));
@@ -29,7 +29,7 @@ public class Agrupaciones {
         return sb.toString();
     }
 
-    public TSBHashtable getVotacion()
+    public TSBHashtableDA getVotacion()
     {
         return votacion;
     }

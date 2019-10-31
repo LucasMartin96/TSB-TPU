@@ -1,7 +1,6 @@
 package negocio;
 
-import soporte.TSBHashtable;
-import soporte.TextFile;
+import soporte.TSBHashtableDA;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,11 +9,11 @@ import java.util.Scanner;
 
 public class Resultados {
     private Agrupaciones agrupaciones;
-    private TSBHashtable resultados;
+    private TSBHashtableDA resultados;
 
     public Resultados(Agrupaciones agrupaciones, String carpeta) {
         this.agrupaciones = agrupaciones;
-        resultados = new TSBHashtable();
+        resultados = new TSBHashtableDA();
         resultados.put("00",agrupaciones.generarVacia());
         cargarResultados(carpeta);
     }
@@ -24,7 +23,7 @@ public class Resultados {
     }
 
     public void sumarPorAgrupacion(String path) {
-        TSBHashtable res;
+        TSBHashtableDA res;
         String linea, campos[], categoria, codAgrupacion;
         int votos;
         Scanner scanner = null;
@@ -39,7 +38,7 @@ public class Resultados {
                     votos = Integer.parseInt(campos[6]);
 
                     //Pais
-                    res = (TSBHashtable) resultados.get("00");
+                    res = (TSBHashtableDA) resultados.get("00");
                     ((Agrupacion) res.get(codAgrupacion)).sumar(votos);
 
 
@@ -60,18 +59,18 @@ public class Resultados {
 
 
     public Collection getResultados(String codRegion) {
-        return((TSBHashtable) (resultados.get(codRegion))).values();
+        return((TSBHashtableDA) (resultados.get(codRegion))).values();
     }
 
-    public TSBHashtable getOrPut (String codRegion)
+    public TSBHashtableDA getOrPut (String codRegion)
     {
-        TSBHashtable table = (TSBHashtable) resultados.get(codRegion);
+        TSBHashtableDA table = (TSBHashtableDA) resultados.get(codRegion);
         if(table != null)
             return table;
         else
         {
             resultados.put(codRegion,agrupaciones.generarVacia());
-            return (TSBHashtable) resultados.get(codRegion);
+            return (TSBHashtableDA) resultados.get(codRegion);
         }
     }
 }

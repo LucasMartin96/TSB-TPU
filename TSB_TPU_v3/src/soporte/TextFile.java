@@ -1,7 +1,6 @@
 package soporte;
 
 import negocio.Agrupacion;
-import negocio.Agrupaciones;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,9 +22,9 @@ public class TextFile {
     }
 
 
-    public TSBHashtable identificarAgrupaciones() {
+    public TSBHashtableDA identificarAgrupaciones() {
         String linea, campos[], categoria, codigo, nombre;
-        TSBHashtable table = new TSBHashtable();
+        TSBHashtableDA table = new TSBHashtableDA();
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(path));

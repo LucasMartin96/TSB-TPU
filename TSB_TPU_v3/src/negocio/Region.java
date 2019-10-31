@@ -1,20 +1,19 @@
 package negocio;
 
-import soporte.TSBHashtable;
-import soporte.TextFile;
+import soporte.TSBHashtableDA;
 
 import java.util.Collection;
 
 public class Region {
     private String codigo;
     private String nombre;
-    private TSBHashtable subregiones;
+    private TSBHashtableDA subregiones;
 
 
     public Region(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
-        subregiones = new TSBHashtable();
+        subregiones = new TSBHashtableDA();
     }
 
     public Region getOrPut(String codigoSub) {
