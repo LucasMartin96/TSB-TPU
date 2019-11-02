@@ -18,6 +18,13 @@ public class Resultados {
         cargarResultados(carpeta);
     }
 
+    public Resultados(Agrupaciones agrupaciones, Region pais, String carpeta) {
+        this.agrupaciones = agrupaciones;
+        resultados = new TSBHashtableDA();
+        resultados.put(pais.getCodigo(),agrupaciones.generarVacia());
+        cargarResultados(carpeta);
+    }
+
     public void cargarResultados(String carpeta) {
         sumarPorAgrupacion(carpeta + "\\mesas_totales_agrp_politica.dsv");
     }
@@ -40,14 +47,14 @@ public class Resultados {
                     //Pais
                     res = (TSBHashtableDA) resultados.get("00");
                     ((Agrupacion) res.get(codAgrupacion)).sumar(votos);
-
-
                     //Distrito
                     ((Agrupacion) getOrPut(campos[0]).get(codAgrupacion)).sumar(votos);
-
-                    //Circuito
+                    //Seccion
                     ((Agrupacion) getOrPut(campos[1]).get(codAgrupacion)).sumar(votos);
-
+                    //Circuito
+                    ((Agrupacion) getOrPut(campos[2]).get(codAgrupacion)).sumar(votos);
+                    //Mesas
+                    ((Agrupacion) getOrPut(campos[3]).get(codAgrupacion)).sumar(votos);
                 }
             }
         } catch (FileNotFoundException e) {

@@ -31,10 +31,10 @@ public class Agrupacion {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Agrupacion{");
-        sb.append("nombre='").append(nombre).append('\'');
-        sb.append(", votos=").append(votos);
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer("");
+        sb.append(" ").append(nombre);
+        sb.append("------").append(votos);
+        sb.append(' ');
         return sb.toString();
     }
 }

@@ -63,4 +63,8 @@ public class Regiones {
         Region region = (Region) pais.get("00");
         return region.getSubregiones();
     }
+
+    public Region getPais() {
+        return (Region) pais.get("00");
+    }
 }

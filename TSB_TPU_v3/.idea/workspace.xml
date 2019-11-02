@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TSB_TPU_v3/interfaz/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TSB_TPU_v3/interfaz/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaz/PrincipalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaz/PrincipalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaz/principal.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaz/principal.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/negocio/Agrupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/negocio/Agrupacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/negocio/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/negocio/Region.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/negocio/Regiones.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/negocio/Regiones.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/negocio/Resultados.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/negocio/Resultados.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +100,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -218,6 +227,7 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
       <workItem from="1572491852485" duration="2239000" />
+      <workItem from="1572730046779" duration="7373000" />
     </task>
     <servers />
   </component>
@@ -229,7 +239,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -238,6 +250,13 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="regiones" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

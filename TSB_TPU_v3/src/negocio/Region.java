@@ -45,4 +45,8 @@ public class Region {
         final StringBuffer sb = new StringBuffer(codigo+" - " + nombre);
         return sb.toString();
     }
+
+    public String getCodigo() {
+        return codigo;
+    }
 }
