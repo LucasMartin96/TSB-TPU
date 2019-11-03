@@ -1,5 +1,6 @@
 package interfaz;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import negocio.Regiones;
 import negocio.Resultados;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 public class PrincipalController {
     public Button btnCargar;
@@ -22,40 +24,53 @@ public class PrincipalController {
     public ComboBox cboSecciones;
     public ComboBox cboCircuito;
     public ComboBox cboMesas;
+    public Button btnMostrarPais;
     private Resultados resultados;
 
-    /*public void cargar(ActionEvent actionEvent) {
-
-        ObservableList ol;
-
-        String carpeta = lblCarpeta.getText();
-        Agrupaciones agrupaciones = new Agrupaciones(carpeta);
-        Regiones regiones = new Regiones(carpeta);
-
-        ol = FXCollections.observableArrayList(regiones.getDistritos());
-        cboDistritos.setItems(ol);
-
-        Resultados resultados = new Resultados(agrupaciones, carpeta);
-
-        ol = FXCollections.observableArrayList(resultados.getResultados("00"));
-        lvwResultados.setItems(ol);
-
-        new Alert(Alert.AlertType.INFORMATION, "Datos Cargados", ButtonType.OK).show();
-
-
-    }*/
+    private Regiones regiones;
+    private final Alert loadingDialog = new Alert(Alert.AlertType.INFORMATION);
 
     public void cargar(ActionEvent actionEvent) {
-        String carpeta = lblCarpeta.getText();
+        loadingDialog.setHeaderText("Cargando Datos, por favor espere...");
+        loadingDialog.show();
 
-        Agrupaciones agrupaciones = new Agrupaciones(carpeta);
+        Thread thread = new Thread(new Runnable() {
 
-        Regiones regiones = new Regiones(carpeta);
-        cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
+            @Override
+            public void run() {
+                Runnable updater = new Runnable() {
 
-        resultados = new Resultados(agrupaciones, regiones.getPais(), carpeta);
-        mostrarResultadosRegion(regiones.getPais().getCodigo());
-        new Alert(Alert.AlertType.INFORMATION, "Datos Cargados", ButtonType.OK).show();
+                    @Override
+                    public void run() {
+                        String carpeta = lblCarpeta.getText();
+                        try{
+                            Agrupaciones agrupaciones = new Agrupaciones(carpeta);
+
+                            regiones = new Regiones(carpeta);
+                            cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
+
+                            resultados = new Resultados(agrupaciones, regiones.getPais(), carpeta);
+                            mostrarResultadosRegion(regiones.getPais().getCodigo());
+
+                            btnMostrarPais.setDisable(false);
+                            loadingDialog.close();
+                        } catch (FileNotFoundException e){
+                            loadingDialog.close();
+                            Alert errorDialog = new Alert(Alert.AlertType.ERROR);
+                            errorDialog.setHeaderText("Error al cargar resultados, por favor verifique la carpeta seleccionada");
+                            errorDialog.show();
+                        }
+
+                    }
+                };
+                Platform.runLater(updater);
+
+            }
+
+        });
+
+        thread.setDaemon(true);
+        thread.start();
     }
 
     public void cambiarUbicacion(ActionEvent actionEvent) {
@@ -70,6 +85,12 @@ public class PrincipalController {
         lvwResultados.getItems().clear();
         ObservableList ol = FXCollections.observableArrayList(resultados.getResultados(codRegion));
         lvwResultados.setItems(ol);
+    }
+
+    public void elegirPais(ActionEvent actionEvent) {
+
+        cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
+        mostrarResultadosRegion(regiones.getPais().getCodigo());
     }
 
     public void elegirDistrito(ActionEvent actionEvent) {
@@ -107,4 +128,5 @@ public class PrincipalController {
                 mostrarResultadosRegion(r.getCodigo());
             }
     }
+
 }
