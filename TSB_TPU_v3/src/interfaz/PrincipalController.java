@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import negocio.Agrupaciones;
 import negocio.Region;
@@ -58,10 +59,10 @@ public class PrincipalController {
     }
 
     public void cambiarUbicacion(ActionEvent actionEvent) {
-        FileChooser fc = new FileChooser();
-        File file = fc.showOpenDialog(null);
+        DirectoryChooser dc = new DirectoryChooser();
+        File file = dc.showDialog(null);
         if (file != null) {
-            lblCarpeta.setText(file.getParent());
+            lblCarpeta.setText(file.getPath());
         }
     }
 
