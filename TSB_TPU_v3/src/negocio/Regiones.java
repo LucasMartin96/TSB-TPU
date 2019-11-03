@@ -10,13 +10,15 @@ import java.util.Scanner;
 public class Regiones {
     private TSBHashtableDA pais;
 
-    public Regiones(String carpeta) {
+    public Regiones(String carpeta) throws FileNotFoundException
+    {
         pais = new TSBHashtableDA();
         pais.put("00",new Region("00","Argentina"));
         identificarRegiones(carpeta + "\\descripcion_regiones.dsv");
     }
 
-    public void identificarRegiones(String path) {
+    public void identificarRegiones(String path) throws FileNotFoundException
+    {
         String linea, campos[], codigo, nombre, distrito, seccion;
         Scanner scanner = null;
         Region reg,dis, secc, circ;
@@ -53,8 +55,7 @@ public class Regiones {
             }
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado " + e);
-        } catch (Exception e) {
-            System.out.println(e);
+            throw e;
         }
     }
 

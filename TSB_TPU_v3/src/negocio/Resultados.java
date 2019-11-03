@@ -10,26 +10,24 @@ import java.util.Scanner;
 public class Resultados {
     private Agrupaciones agrupaciones;
     private TSBHashtableDA resultados;
+    private Region pais;
 
-    public Resultados(Agrupaciones agrupaciones, String carpeta) {
+    public Resultados(Agrupaciones agrupaciones, Region pais, String carpeta) throws FileNotFoundException
+    {
         this.agrupaciones = agrupaciones;
+        this.pais = pais;
         resultados = new TSBHashtableDA();
-        resultados.put("00",agrupaciones.generarVacia());
+        resultados.put(pais.getCodigo(), agrupaciones.generarVacia());
         cargarResultados(carpeta);
     }
 
-    public Resultados(Agrupaciones agrupaciones, Region pais, String carpeta) {
-        this.agrupaciones = agrupaciones;
-        resultados = new TSBHashtableDA();
-        resultados.put(pais.getCodigo(),agrupaciones.generarVacia());
-        cargarResultados(carpeta);
-    }
-
-    public void cargarResultados(String carpeta) {
+    public void cargarResultados(String carpeta)throws FileNotFoundException
+    {
         sumarPorAgrupacion(carpeta + "\\mesas_totales_agrp_politica.dsv");
     }
 
-    public void sumarPorAgrupacion(String path) {
+    public void sumarPorAgrupacion(String path) throws FileNotFoundException
+    {
         TSBHashtableDA res;
         String linea, campos[], categoria, codAgrupacion;
         int votos;
@@ -55,12 +53,14 @@ public class Resultados {
                     ((Agrupacion) getOrPut(campos[2]).get(codAgrupacion)).sumar(votos);
                     //Mesas
                     ((Agrupacion) getOrPut(campos[3]).get(codAgrupacion)).sumar(votos);
+
+                    //Agrega mesa a lista de mesas
+                    agregarMesa(campos[0], campos[1], campos[2], campos[3]);
                 }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado " + e);
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 
@@ -80,4 +80,12 @@ public class Resultados {
             return (TSBHashtableDA) resultados.get(codRegion);
         }
     }
+
+    public void agregarMesa(String codDistrito, String codSeccion, String codCircuito, String codMesa){
+        Region distrito = pais.getSubregion(codDistrito);
+        Region seccion = distrito.getSubregion(codSeccion);
+        Region circuito = seccion.getSubregion(codCircuito);
+        circuito.getOrPut(codMesa).setNombre(codMesa);
+    }
+
 }

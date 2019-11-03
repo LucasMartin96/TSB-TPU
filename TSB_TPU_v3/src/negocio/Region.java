@@ -31,7 +31,7 @@ public class Region {
         return subregiones.values();
     }
 
-    public Region getSubregion(String coidgo)
+    public Region getSubregion(String codigo)
     {
         return (Region) subregiones.get(codigo);
     }

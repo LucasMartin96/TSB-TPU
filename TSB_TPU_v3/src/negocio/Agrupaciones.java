@@ -31,11 +31,6 @@ public class Agrupaciones {
         return sb.toString();
     }
 
-    public TSBHashtableDA getVotacion()
-    {
-        return votacion;
-    }
-
     public TSBHashtableDA identificarAgrupaciones(String path) throws FileNotFoundException {
         String linea, campos[], categoria, codigo, nombre;
         TSBHashtableDA table = new TSBHashtableDA();
@@ -55,10 +50,10 @@ public class Agrupaciones {
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado " + e);
             throw e;
-        } catch (Exception e) {
-            System.out.println(e);
         }
         return table;
     }
+
+
 
 }

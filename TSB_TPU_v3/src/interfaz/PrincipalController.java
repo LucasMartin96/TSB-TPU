@@ -47,10 +47,9 @@ public class PrincipalController {
                             Agrupaciones agrupaciones = new Agrupaciones(carpeta);
 
                             regiones = new Regiones(carpeta);
-                            cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
-
                             resultados = new Resultados(agrupaciones, regiones.getPais(), carpeta);
                             mostrarResultadosRegion(regiones.getPais().getCodigo());
+                            cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
 
                             btnMostrarPais.setDisable(false);
                             loadingDialog.close();
@@ -88,8 +87,7 @@ public class PrincipalController {
     }
 
     public void elegirPais(ActionEvent actionEvent) {
-
-        cboDistritos.setItems(FXCollections.observableArrayList(regiones.getPais().getSubregiones()));
+        cboDistritos.setValue(null);
         mostrarResultadosRegion(regiones.getPais().getCodigo());
     }
 
@@ -100,7 +98,7 @@ public class PrincipalController {
             mostrarResultadosRegion(r.getCodigo());
         } else
             cboSecciones.setItems(null);
-            }
+    }
 
     public void elegirSeccion(ActionEvent actionEvent) {
         Region r = (Region) cboSecciones.getValue();
