@@ -1,15 +1,17 @@
 package negocio;
 
 import soporte.TSBHashtableDA;
-import soporte.TextFile;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class Agrupaciones {
-    private TextFile descripcionPostulaciones;
     private TSBHashtableDA votacion;
 
-    public Agrupaciones(String carpeta) {
-        descripcionPostulaciones = new TextFile(carpeta + "\\descripcion_postulaciones.dsv");
-        votacion = descripcionPostulaciones.identificarAgrupaciones();
+    public Agrupaciones(String carpeta) throws FileNotFoundException
+    {
+        votacion = identificarAgrupaciones(carpeta + "\\descripcion_postulaciones.dsv");
     }
 
     public TSBHashtableDA generarVacia() {
@@ -32,6 +34,31 @@ public class Agrupaciones {
     public TSBHashtableDA getVotacion()
     {
         return votacion;
+    }
+
+    public TSBHashtableDA identificarAgrupaciones(String path) throws FileNotFoundException {
+        String linea, campos[], categoria, codigo, nombre;
+        TSBHashtableDA table = new TSBHashtableDA();
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(new File(path));
+            while (scanner.hasNextLine()) {
+                linea = scanner.nextLine();
+                campos = linea.split("\\|");
+                categoria = campos[0];
+                if (categoria.compareTo("000100000000000") == 0) {
+                    codigo = campos[2];
+                    nombre = campos[3];
+                    table.put(codigo, new Agrupacion(codigo,nombre,0));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo no encontrado " + e);
+            throw e;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return table;
     }
 
 }
