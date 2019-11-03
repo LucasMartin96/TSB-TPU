@@ -54,8 +54,8 @@ public class Resultados {
                     //Mesas
                     ((Agrupacion) getOrPut(campos[3]).get(codAgrupacion)).sumar(votos);
 
-                    //Agrega mesa a lista de mesas
-                    agregarMesa(campos[0], campos[1], campos[2], campos[3]);
+                    //Agrega mesa a lista de mesas de un circuito
+                    pais.getSubregion(campos[0]).getSubregion(campos[1]).getSubregion(campos[2]).getOrPut(campos[3]);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -79,13 +79,6 @@ public class Resultados {
             resultados.put(codRegion,agrupaciones.generarVacia());
             return (TSBHashtableDA) resultados.get(codRegion);
         }
-    }
-
-    public void agregarMesa(String codDistrito, String codSeccion, String codCircuito, String codMesa){
-        Region distrito = pais.getSubregion(codDistrito);
-        Region seccion = distrito.getSubregion(codSeccion);
-        Region circuito = seccion.getSubregion(codCircuito);
-        circuito.getOrPut(codMesa).setNombre(codMesa);
     }
 
 }
